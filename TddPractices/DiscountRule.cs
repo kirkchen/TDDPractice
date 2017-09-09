@@ -16,11 +16,14 @@ namespace TddPractices
 
         public double DiscountRate { get; set; }
 
+        public bool IsDefault { get; set; }
+
         public bool IsMatchRule(string level, double price, int qty)
         {
-            return level == this.Level &&
+            return (level == this.Level &&
                 price > this.PriceGate &&
-                qty > this.QtyGate;
+                qty > this.QtyGate) ||
+                this.IsDefault;
         }
     }
 }

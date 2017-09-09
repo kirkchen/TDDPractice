@@ -8,8 +8,9 @@ namespace TddPractices
     {
         private IEnumerable<DiscountRule> discountRules = new[]
         {
-            new DiscountRule{ Level = "VIP", PriceGate = 500, QtyGate = 0, DiscountRate = 0.8},
-            new DiscountRule{ Level = "NORMAL", PriceGate = 1000, QtyGate = 3, DiscountRate = 0.85},
+            new DiscountRule{ Level = "VIP", PriceGate = 500, QtyGate = 0, DiscountRate = 0.8, IsDefault = false },
+            new DiscountRule{ Level = "NORMAL", PriceGate = 1000, QtyGate = 3, DiscountRate = 0.85, IsDefault = false },
+            new DiscountRule{ DiscountRate = 1, IsDefault = true},
         };
 
         public double Calculate(string level, double price, int qty)
@@ -22,13 +23,10 @@ namespace TddPractices
 
         private double GetDiscountRate(string level, int qty, double totalPrice)
         {
-            var defaultRule = new DiscountRule { DiscountRate = 1 };
             var matchedRule = this.discountRules.Where(i => i.IsMatchRule(level, totalPrice, qty))
                                                 .FirstOrDefault();
 
-            var rule = matchedRule ?? defaultRule;
-
-            return rule.DiscountRate;
+            return matchedRule.DiscountRate;
         }
     }
 }
