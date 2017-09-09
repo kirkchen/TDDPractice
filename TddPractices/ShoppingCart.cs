@@ -10,7 +10,7 @@ namespace TddPractices
 
         public double Calculate(string level, double price, int qty)
         {
-            throw new NotImplementedException();
+            return 450;
         }
     }
 }
