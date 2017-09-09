@@ -24,9 +24,7 @@ namespace TddPractices
             var discountRate = 1d;
             foreach (var rule in this.discountRules)
             {
-                if(level == rule.Level &&
-                    totalPrice > rule.PriceGate &&
-                    qty > rule.QtyGate)
+                if(rule.IsMatchRule(level, totalPrice, qty))
                 {
                     discountRate = rule.DiscountRate;
                     break;
