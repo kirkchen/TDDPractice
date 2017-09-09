@@ -21,6 +21,7 @@ namespace TddPractices.Tests
         [InlineData("NORMAL", 300, 2, 600)]
         [InlineData("NORMAL", 600, 4, 2040)]
         [InlineData("NORMAL", 600, 2, 1200)]
+        [InlineData("NORMAL", 200, 4, 800)]
         public void Test_ShoppingCart_Calculate(string level, double price, int qty, double expected)
         {
             // Arrange
