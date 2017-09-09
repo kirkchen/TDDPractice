@@ -15,6 +15,10 @@ namespace TddPractices
             {
                 return totalPrice * 0.8;
             }
+            else if (totalPrice > 1000)
+            {
+                return totalPrice * 0.85;
+            }
 
             return totalPrice;
         }
