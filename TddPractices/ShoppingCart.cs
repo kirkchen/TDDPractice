@@ -11,8 +11,15 @@ namespace TddPractices
         public double Calculate(string level, double price, int qty)
         {
             var totalPrice = price * qty;
+            double discountRate = this.GetDiscountRate(level, qty, totalPrice);
+
+            return totalPrice * discountRate;
+        }
+
+        private double GetDiscountRate(string level, int qty, double totalPrice)
+        {
             var discountRate = 1d;
-            if(level == "VIP" && totalPrice > 500)
+            if (level == "VIP" && totalPrice > 500)
             {
                 discountRate = 0.8;
             }
@@ -21,7 +28,7 @@ namespace TddPractices
                 discountRate = 0.85;
             }
 
-            return totalPrice * discountRate;
+            return discountRate;
         }
     }
 }
