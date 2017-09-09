@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TddPractices
 {
     public class ShoppingCart
     {
-        public ShoppingCart()
+        private IEnumerable<DiscountRule> discountRules = new[]
         {
-        }
+            new DiscountRule{ Level = "VIP", PriceGate = 500, QtyGate = 0, DiscountRate = 0.8},
+            new DiscountRule{ Level = "NORMAL", PriceGate = 1000, QtyGate = 3, DiscountRate = 0.85},
+        };
 
         public double Calculate(string level, double price, int qty)
         {
@@ -19,13 +22,15 @@ namespace TddPractices
         private double GetDiscountRate(string level, int qty, double totalPrice)
         {
             var discountRate = 1d;
-            if (level == "VIP" && totalPrice > 500 && qty > 0)
+            foreach (var rule in this.discountRules)
             {
-                discountRate = 0.8;
-            }
-            else if (level == "NORMAL" && totalPrice > 1000 && qty > 3)
-            {
-                discountRate = 0.85;
+                if(level == rule.Level &&
+                    totalPrice > rule.PriceGate &&
+                    qty > rule.QtyGate)
+                {
+                    discountRate = rule.DiscountRate;
+                    break;
+                }
             }
 
             return discountRate;
