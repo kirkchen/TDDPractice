@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TddPractices
 {
@@ -14,7 +15,7 @@ namespace TddPractices
         public double Calculate(string level, double price, int qty)
         {
             var totalPrice = price * qty;
-            double discountRate = this.GetDiscountRate(level, qty, totalPrice);
+            var discountRate = this.GetDiscountRate(level, qty, totalPrice);
 
             return totalPrice * discountRate;
         }
@@ -22,13 +23,11 @@ namespace TddPractices
         private double GetDiscountRate(string level, int qty, double totalPrice)
         {
             var discountRate = 1d;
-            foreach (var rule in this.discountRules)
+            var matchedRule = this.discountRules.Where(i => i.IsMatchRule(level, totalPrice, qty))
+                                                .FirstOrDefault();
+            if(matchedRule != null)
             {
-                if(rule.IsMatchRule(level, totalPrice, qty))
-                {
-                    discountRate = rule.DiscountRate;
-                    break;
-                }
+                discountRate = matchedRule.DiscountRate;
             }
 
             return discountRate;
