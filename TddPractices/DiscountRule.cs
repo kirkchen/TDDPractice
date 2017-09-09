@@ -8,7 +8,7 @@ namespace TddPractices
 {
     public class DiscountRule
     {
-        public string Level { get; set; }
+        public MemberLevel Level { get; set; }
 
         public double PriceGate { get; set; }
 
@@ -18,7 +18,7 @@ namespace TddPractices
 
         public bool IsDefault { get; set; }
 
-        public bool IsMatchRule(string level, double price, int qty)
+        public bool IsMatchRule(MemberLevel level, double price, int qty)
         {
             return (level == this.Level &&
                 price > this.PriceGate &&

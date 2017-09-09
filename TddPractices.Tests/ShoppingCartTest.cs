@@ -16,13 +16,13 @@ namespace TddPractices.Tests
         // 5. 一般 會員, 購買 600 元商品 2 件, 結帳金額為 1200 元
         // 6. 一般 會員, 購買 200 元商品 4 件, 結帳金額為 800 元
         [Theory]
-        [InlineData("VIP", 150, 3, 450)]
-        [InlineData("VIP", 150, 5, 600)]
-        [InlineData("NORMAL", 300, 2, 600)]
-        [InlineData("NORMAL", 600, 4, 2040)]
-        [InlineData("NORMAL", 600, 2, 1200)]
-        [InlineData("NORMAL", 200, 4, 800)]
-        public void Test_ShoppingCart_Calculate(string level, double price, int qty, double expected)
+        [InlineData(MemberLevel.VIP, 150, 3, 450)]
+        [InlineData(MemberLevel.VIP, 150, 5, 600)]
+        [InlineData(MemberLevel.Normal, 300, 2, 600)]
+        [InlineData(MemberLevel.Normal, 600, 4, 2040)]
+        [InlineData(MemberLevel.Normal, 600, 2, 1200)]
+        [InlineData(MemberLevel.Normal, 200, 4, 800)]
+        public void Test_ShoppingCart_Calculate(MemberLevel level, double price, int qty, double expected)
         {
             // Arrange
             var actual = 0d;
