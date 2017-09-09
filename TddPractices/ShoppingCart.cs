@@ -22,15 +22,13 @@ namespace TddPractices
 
         private double GetDiscountRate(string level, int qty, double totalPrice)
         {
-            var discountRate = 1d;
+            var defaultRule = new DiscountRule { DiscountRate = 1 };
             var matchedRule = this.discountRules.Where(i => i.IsMatchRule(level, totalPrice, qty))
                                                 .FirstOrDefault();
-            if(matchedRule != null)
-            {
-                discountRate = matchedRule.DiscountRate;
-            }
 
-            return discountRate;
+            var rule = matchedRule ?? defaultRule;
+
+            return rule.DiscountRate;
         }
     }
 }
