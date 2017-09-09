@@ -16,17 +16,9 @@ namespace TddPractices
         public double Calculate(string level, double price, int qty)
         {
             var totalPrice = price * qty;
-            var discountRate = this.GetDiscountRate(level, qty, totalPrice);
+            var matchedRule = this.discountRules.FirstOrDefault(i => i.IsMatchRule(level, totalPrice, qty));
 
-            return totalPrice * discountRate;
-        }
-
-        private double GetDiscountRate(string level, int qty, double totalPrice)
-        {
-            var matchedRule = this.discountRules.Where(i => i.IsMatchRule(level, totalPrice, qty))
-                                                .FirstOrDefault();
-
-            return matchedRule.DiscountRate;
+            return totalPrice * matchedRule.DiscountRate;
         }
     }
 }
